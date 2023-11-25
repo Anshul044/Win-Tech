@@ -1,0 +1,18 @@
+version: '3.8'
+services:
+  mongo:
+    image: mongo:latest
+    ports:
+      - 27017:27017
+    volumes: 
+      - ./mongo:/data/db
+  api:
+    image: node:16
+    build: .
+    depends_on:
+      - mongo
+    ports: 
+      - "3000:3000"
+    # command: "npm run start"
+volumes:
+  mongo:
